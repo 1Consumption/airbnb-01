@@ -9,12 +9,13 @@
 import UIKit
 
 class RangeSliderTrackLayer: CALayer {
+    
     weak var rangeSlider: RangeSlider?
     
     override func draw(in ctx: CGContext) {
-        guard let slider = rangeSlider else {
-            return
-        }
+        super.draw(in: ctx)
+        
+        guard let slider = rangeSlider else { return }
         
         let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         ctx.addPath(path.cgPath)

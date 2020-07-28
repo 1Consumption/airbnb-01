@@ -17,7 +17,7 @@ class URLBinder {
     
     func registerRoomID(room: ImageUpdatable) {
         room.images.forEach {
-            guard binder[room.id]?[$0.url] == nil else {return}
+            guard binder[room.id]?[$0.url] == nil else { return }
             guard binder[room.id] != nil else {
                 binder[room.id] = [String: URL?]()
                 binder[room.id]?.updateValue(nil, forKey: $0.url)
@@ -29,7 +29,7 @@ class URLBinder {
     
     func localUrl(index: Int, of url: String) -> URL? {
         let dic = binder[index]
-        guard let result = dic?[url] else {return URL(fileURLWithPath: "")}
+        guard let result = dic?[url] else { return URL(fileURLWithPath: "") }
         return result
     }
     

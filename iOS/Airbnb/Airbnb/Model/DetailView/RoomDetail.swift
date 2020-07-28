@@ -9,6 +9,7 @@
 import UIKit
 
 struct RoomDetail: Decodable, ImageUpdatable {
+    
     var coordinate: Coordinate
     var id: Int
     var images: [Image]
@@ -19,11 +20,13 @@ struct RoomDetail: Decodable, ImageUpdatable {
 }
 
 struct Coordinate: Decodable {
+    
     var latitude: Double
     var longitude: Double
 }
 
 struct Review: Decodable {
+    
     var star: Int
     var content: String
     var email: String

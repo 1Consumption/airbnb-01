@@ -9,6 +9,7 @@
 import Foundation
 
 struct Room: Decodable, ImageUpdatable {
+    
     var id: Int
     var images: [Image]
     var name: String
@@ -17,10 +18,12 @@ struct Room: Decodable, ImageUpdatable {
 }
 
 struct Image: Decodable {
+    
     var type: String
     var url: String
 }
 
 struct Price: Decodable {
+    
     var price: Int
 }

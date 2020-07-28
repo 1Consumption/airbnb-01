@@ -27,9 +27,7 @@ struct RoomManager {
     }
     
     var count: Int {
-        get {
-            return roomList.count
-        }
+        get { return roomList.count }
     }
     
     private(set) var roomList: [Room]

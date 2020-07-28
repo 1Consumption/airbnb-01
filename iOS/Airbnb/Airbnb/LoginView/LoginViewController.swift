@@ -11,7 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBAction func modalWebView(_ sender: Any) {
-        guard let oauthViewController = storyboard?.instantiateViewController(withIdentifier: "OAuthViewController") as? OAuthViewController else {return}
+        guard let oauthViewController = storyboard?.instantiateViewController(withIdentifier: "OAuthViewController") as? OAuthViewController else { return }
         present(oauthViewController, animated: true)
     }
     
@@ -27,12 +27,8 @@ class LoginViewController: UIViewController {
                                                object: nil)
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     @objc func tokenReceived() {
-        guard let tabbarController = storyboard?.instantiateViewController(withIdentifier: "TabbarController") as? UITabBarController else {return}
+        guard let tabbarController = storyboard?.instantiateViewController(withIdentifier: "TabbarController") as? UITabBarController else { return }
         tabbarController.modalPresentationStyle = .fullScreen
         present(tabbarController, animated: true)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PriceUseCase {
+struct PriceUseCase {
     
     private var networkManager: NetworkManageable
     

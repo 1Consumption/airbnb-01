@@ -19,7 +19,7 @@ class DetailMapViewController: UIViewController {
     }
     
     func showMap() {
-        guard let roomInfo = roomInfo else {return}
+        guard let roomInfo = roomInfo else { return }
         let coordinate = roomInfo.coordinate
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
         let mapView = GMSMapView.map(withFrame: self.view.frame, camera: camera)

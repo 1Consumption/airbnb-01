@@ -10,7 +10,6 @@ import Foundation
 
 extension Date {
     var startOfMonth: Date {
-
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([.year, .month], from: self)
 

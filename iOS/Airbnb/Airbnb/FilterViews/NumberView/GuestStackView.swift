@@ -10,7 +10,7 @@ import UIKit
 
 class GuestStackView: UIStackView {
     
-    private let guestTitles = [["성인", "만13세 이상"],["청소년", "만3세 ~ 만12세"],["영유아", "만2세 이하"]]
+    private let guestTitles = [["성인", "만13세 이상"], ["청소년", "만3세 ~ 만12세"], ["영유아", "만2세 이하"]]
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
@@ -39,7 +39,7 @@ class GuestStackView: UIStackView {
     
     func reset() {
         self.subviews.forEach {
-            guard let guestView = $0 as? GuestView else {return}
+            guard let guestView = $0 as? GuestView else { return }
             guestView.reset()
         }
     }
@@ -54,14 +54,14 @@ class GuestStackView: UIStackView {
     }
     
     func totalGuest() -> [String] {
-        return subviews.reduce(into: [String]()) {$0.append("\($1)")}
+        return subviews.reduce(into: [String]()) { $0.append("\($1)") }
     }
     
     func setNumbers(adult: String, youth: String, infants: String) {
         let guest = [adult, youth, infants]
         for (index, subView) in subviews.enumerated() {
-            guard let guestView = subView as? GuestView else {return}
-            guard let number = Int(guest[index]) else {return}
+            guard let guestView = subView as? GuestView else { return }
+            guard let number = Int(guest[index]) else { return }
             guestView.setNumber(number: number)
         }
     }

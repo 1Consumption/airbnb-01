@@ -14,10 +14,6 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var rightView: UIView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override func prepareForReuse() {
         self.isHidden = false
         self.isUserInteractionEnabled = true

@@ -33,7 +33,6 @@ class OAuthViewController: UIViewController {
 }
 
 extension OAuthViewController: WKNavigationDelegate {
-    
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         let header = navigationResponse.response as? HTTPURLResponse
         if let token = header?.headers.dictionary["Authorization"] {

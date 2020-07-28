@@ -10,7 +10,6 @@ import Foundation
 
 struct RooomListInMapUseCase {
     
-    
     private var networkManager: NetworkManageable
     
     init(networkManager: NetworkManageable) {

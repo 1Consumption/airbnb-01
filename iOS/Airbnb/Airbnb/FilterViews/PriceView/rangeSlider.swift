@@ -9,6 +9,7 @@
 import UIKit
 
 class RangeSlider: UIControl {
+    
     let minimumValue: CGFloat = 0
     let maximumValue: CGFloat = 1
     var lowerValue: CGFloat = 0
@@ -56,8 +57,8 @@ class RangeSlider: UIControl {
         updateLayerFrames()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     private func updateLayerFrames() {
@@ -86,6 +87,7 @@ class RangeSlider: UIControl {
 
 extension RangeSlider {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.beginTracking(touch, with: event)
         previousLocation = touch.location(in: self)
         
         if lowerThumbImageView.frame.contains(previousLocation) {
@@ -98,6 +100,7 @@ extension RangeSlider {
     }
     
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.continueTracking(touch, with: event)
         let location = touch.location(in: self)
         let deltaLocation = location.x - previousLocation.x
         let deltaValue = (maximumValue - minimumValue) * deltaLocation / bounds.width
@@ -124,13 +127,14 @@ extension RangeSlider {
         return true
     }
     
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        super.endTracking(touch, with: event)
+        lowerThumbImageView.isHighlighted = false
+        upperThumbImageView.isHighlighted = false
+    }
+    
     private func boundValue(_ value: CGFloat, toLowerValue lowerValue: CGFloat,
                             upperValue: CGFloat) -> CGFloat {
         return min(max(value, lowerValue), upperValue)
-    }
-    
-    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-        lowerThumbImageView.isHighlighted = false
-        upperThumbImageView.isHighlighted = false
     }
 }

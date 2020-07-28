@@ -70,13 +70,7 @@ class PriceViewController: UIViewController {
         useCase.requestPrice(queryString: FilterManager.shared.queryString(),
                              failureHandler: {[unowned self] in
                                 AlertView.alertError(viewController: self, message: $0)},
-                             successHandler: {[unowned self] _ in
-                                
-        })
-    }
-    
-    deinit {
-        
+                             successHandler: { _ in })
     }
     
     @objc func closeButtonClicked() {

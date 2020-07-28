@@ -40,6 +40,7 @@ class NetworkManager: NetworkManageable {
 }
 
 struct Booking: Encodable {
+    
     var accommodationId: Int
     var checkIn: String
     var checkOut: String

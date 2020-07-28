@@ -20,9 +20,7 @@ struct ImageUseCase {
     func enqueueImages(images: [Image], failureHandler: @escaping (String) -> (), completed: @escaping(String ,URL) -> ()) {
         images.forEach {
             let url = $0.url
-            requestImage(imageURLPath: url, failureHandler: failureHandler, completed: {
-                completed(url, $0)
-            })
+            requestImage(imageURLPath: url, failureHandler: failureHandler, completed: { completed(url, $0) })
         }
     }
     

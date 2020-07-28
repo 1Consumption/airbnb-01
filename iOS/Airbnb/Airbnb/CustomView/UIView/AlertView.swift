@@ -9,6 +9,7 @@
 import UIKit
 
 final class AlertView {
+    
     static func alertError(viewController: UIViewController, message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "문제가 생겼어요", message: message, preferredStyle: .alert)

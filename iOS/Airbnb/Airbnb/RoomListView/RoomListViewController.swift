@@ -16,22 +16,22 @@ class RoomListViewController: UIViewController {
     @IBOutlet weak var priceButton: FilterButton!
     @IBOutlet weak var searchTextField: PaddingTextField!
     @IBAction func calendarButtonClicked(_ sender: FilterButton) {
-        guard let calendarViewController = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else {return}
+        guard let calendarViewController = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else { return }
         calendarViewController.modalPresentationStyle = .overFullScreen
         present(calendarViewController, animated: true)
     }
     @IBAction func numberButtonClicked(_ sender: FilterButton) {
-        guard let numberViewController = storyboard?.instantiateViewController(withIdentifier: "NumberViewController") as? NumberViewController else {return}
+        guard let numberViewController = storyboard?.instantiateViewController(withIdentifier: "NumberViewController") as? NumberViewController else { return }
         numberViewController.modalPresentationStyle = .overFullScreen
         present(numberViewController, animated: true)
     }
     @IBAction func PriceButtonClicked(_ sender: FilterButton) {
-        guard let priceViewController = storyboard?.instantiateViewController(withIdentifier: "PriceViewController") as? PriceViewController else {return}
+        guard let priceViewController = storyboard?.instantiateViewController(withIdentifier: "PriceViewController") as? PriceViewController else { return }
         priceViewController.modalPresentationStyle = .overFullScreen
         present(priceViewController, animated: true)
     }
     @IBAction func locationButtonClicked(_ sender: UIButton) {
-        guard let mapViewController = storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else {return}
+        guard let mapViewController = storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
     
@@ -138,22 +138,20 @@ class RoomListViewController: UIViewController {
     }
     
     private func setTabBarImage() {
-        guard let items = self.tabBarController?.tabBar.items else {return}
+        guard let items = self.tabBarController?.tabBar.items else { return }
         items[0].image = UIImage(named: "magnifyingGlass")
         items[1].image = UIImage(named: "heart")
         items[1].selectedImage = UIImage(named: "heartFill")
     }
     
     private func setButton() {
-        filterButtons.forEach {
-            $0.setRadius()
-        }
+        filterButtons.forEach { $0.setRadius() }
         roomListCollectionView.delaysContentTouches = false
     }
     
     @objc func urlBinded(_ notification: Notification) {
-        guard let roomID = notification.userInfo?["roomID"] as? Int else {return}
-        guard let index = viewModel?.roomListManager.index(findBy: roomID) else {return}
+        guard let roomID = notification.userInfo?["roomID"] as? Int else { return }
+        guard let index = viewModel?.roomListManager.index(findBy: roomID) else { return }
         let updateCellIndexPath = IndexPath(item: index, section: 0)
         roomListCollectionView.reloadItems(at: [updateCellIndexPath])
     }
@@ -169,38 +167,29 @@ class RoomListViewController: UIViewController {
     
     @objc func collectionViewTouched(gesture: UITapGestureRecognizer) {
         let touchLocation:CGPoint = gesture.location(ofTouch: 0, in: roomListCollectionView)
-        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
-        guard let indexPath = roomListCollectionView.indexPathForItem(at: touchLocation) else {return}
-        guard let room = viewModel?.roomListManager.room(of: indexPath.item) else {return}
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        guard let indexPath = roomListCollectionView.indexPathForItem(at: touchLocation) else { return }
+        guard let room = viewModel?.roomListManager.room(of: indexPath.item) else { return }
         detailViewController.roomId = room.id
         detailViewController.price = room.price?.price
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if filterManager.dateFilter != nil {
-            filterButtons[0].selected()
-        }
-        
-        if filterManager.guestInfo != nil {
-            filterButtons[1].selected()
-        }
+        if filterManager.dateFilter != nil { filterButtons[0].selected() }
+        if filterManager.guestInfo != nil { filterButtons[1].selected() }
     }
     
     @objc func dateDone(_ notification: Notification) {
         filterButtons[0].selected()
         setUseCase()
-        if filterManager.dateFilter != nil, filterManager.guestInfo != nil {
-            priceButton.isHidden = false
-        }
+        if filterManager.dateFilter != nil, filterManager.guestInfo != nil { priceButton.isHidden = false }
     }
     
     @objc func addGuestInfo(_ notification: Notification) {
         filterButtons[1].selected()
         setUseCase()
-        if filterManager.dateFilter != nil, filterManager.guestInfo != nil {
-            priceButton.isHidden = false
-        }
+        if filterManager.dateFilter != nil, filterManager.guestInfo != nil { priceButton.isHidden = false }
     }
     
     @objc func priceDone(_ notification: Notification) {

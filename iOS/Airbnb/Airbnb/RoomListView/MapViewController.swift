@@ -16,9 +16,7 @@ class MapViewController: UIViewController {
     private let useCase = RooomListInMapUseCase(networkManager: NetworkManager())
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var searchButton: UIButton!
-    @IBAction func searchButtonClicked(_ sender: UIButton) {
-        sendCurrentLocation()
-    }
+    @IBAction func searchButtonClicked(_ sender: UIButton) { sendCurrentLocation() }
     private var roomList = [MapViewRoomList]() {
         didSet {
             mapView.clear()
@@ -55,8 +53,8 @@ class MapViewController: UIViewController {
     }
     
     @objc func mapLoaded(_ notification: Notification) {
-        guard let origin = notification.userInfo?["origin"] as? CLLocationCoordinate2D else {return}
-        guard let end = notification.userInfo?["end"] as? CLLocationCoordinate2D else {return}
+        guard let origin = notification.userInfo?["origin"] as? CLLocationCoordinate2D else { return }
+        guard let end = notification.userInfo?["end"] as? CLLocationCoordinate2D else { return }
         useCase.requestRoomList(queryString: EndPoint.leftTopLatitude + String(origin.latitude) + "&" + EndPoint.leftTopLongitude + String(origin.longitude) + "&" + EndPoint.rightBottomLatitude + String(end.latitude) + "&" + EndPoint.rightBottomLongitude + String(end.longitude),
                                 failureHandler: {[unowned self] in
                                     AlertView.alertError(viewController: self, message: $0)},

@@ -36,7 +36,7 @@ import UIKit
     
     func configure(about room: Room) {
         self.nameLabel.text = room.name
-        guard let price = room.price?.price else {return}
+        guard let price = room.price?.price else { return }
         self.priceLabel.text = String(price)
         for _ in 0..<room.images.count {
             scrollViewWithPageControlView.appendImageView()

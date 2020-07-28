@@ -102,10 +102,6 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var filterContainerView: FilterContainerView!
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     @objc func closeButtonClicked() {
         dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: .DateCancel,
@@ -114,13 +110,13 @@ class CalendarViewController: UIViewController {
     }
     
     @objc func dateSelected() {
-        guard let start = startDayIndexPath, let end = endDayIndexPath else {return}
+        guard let start = startDayIndexPath, let end = endDayIndexPath else { return }
         let startMonth = calendarManager.monthInfo(of: start.section)
         let endMonth = calendarManager.monthInfo(of: end.section)
         startDay = SelectedDay(year: startMonth.year, month: startMonth.month, day: start.item - (startMonth.startOfMonth - 2))
         endDay = SelectedDay(year: endMonth.year, month: endMonth.month, day: end.item - (endMonth.startOfMonth - 2))
         
-        guard let startDayUnwrapped = startDay, let endDayUnwrapped = endDay else {return}
+        guard let startDayUnwrapped = startDay, let endDayUnwrapped = endDay else { return }
         filterContainerView.doneButtonEnabled()
         if startMonth.year == endMonth.year {
             filterContainerView.setTitle(text: "\(startDayUnwrapped.month)월 \(startDayUnwrapped.day)일 - \(endDayUnwrapped.month)월 \(endDayUnwrapped.day)일")
@@ -155,7 +151,6 @@ class CalendarViewController: UIViewController {
 }
 
 extension CalendarViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return calendarManager.count
     }
@@ -166,7 +161,7 @@ extension CalendarViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dayCell", for: indexPath) as? CalendarCollectionViewCell else {return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dayCell", for: indexPath) as? CalendarCollectionViewCell else { return UICollectionViewCell() }
         let month = calendarManager.monthInfo(of: indexPath.section)
         if indexPath.item >= month.startOfMonth - 1 {
             let today = indexPath.item - (month.startOfMonth - 2)
@@ -179,14 +174,14 @@ extension CalendarViewController: UICollectionViewDataSource {
             cell.isHidden = true
         }
         
-        guard let start = startDayIndexPath else {return cell}
+        guard let start = startDayIndexPath else { return cell }
         
         if start == indexPath {
             cell.selected()
             cell.rightView.backgroundColor = UIColor(named: "CustomGray")
         }
         
-        guard let end = endDayIndexPath else {return cell}
+        guard let end = endDayIndexPath else { return cell }
         
         if end == indexPath {
             cell.selected()
@@ -241,14 +236,14 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell else {return}
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell else { return }
         if startDayIndexPath == nil {
             startDayIndexPath = indexPath
             cell.selected()
         } else if endDayIndexPath == nil {
-            guard let start = startDayIndexPath, start != indexPath else {return}
+            guard let start = startDayIndexPath, start != indexPath else { return }
             endDayIndexPath = indexPath
-            guard let end = endDayIndexPath else {return}
+            guard let end = endDayIndexPath else { return }
             if start > end {
                 endDayIndexPath = startDayIndexPath
                 startDayIndexPath = indexPath

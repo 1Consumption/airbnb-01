@@ -45,6 +45,7 @@ class FilterManager {
 }
 
 struct DateFilter {
+    
     var startDate: Date
     var endDate: Date
     var startIndexPath: IndexPath
@@ -52,6 +53,7 @@ struct DateFilter {
 }
 
 struct GuestInfo {
+    
     var adult: String
     var youth: String
     var infants: String
@@ -61,12 +63,13 @@ struct GuestInfo {
     }
     
     func totalIntegerGuest() -> Int {
-        guard let adultInteger = Int(adult), let youthInteger = Int(youth), let infantsInteger = Int(infants) else {return 0}
+        guard let adultInteger = Int(adult), let youthInteger = Int(youth), let infantsInteger = Int(infants) else { return 0 }
         return adultInteger + youthInteger + infantsInteger
     }
 }
 
 struct PriceFilter {
+    
     var min: String
     var max: String
 }

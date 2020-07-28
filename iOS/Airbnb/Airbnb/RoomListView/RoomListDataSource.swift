@@ -17,14 +17,12 @@ class RoomListDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RoomCell", for: indexPath) as? RoomListCell else {return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RoomCell", for: indexPath) as? RoomListCell else { return UICollectionViewCell() }
         cell.likeButton.setRadius()
-        guard let room = viewModel?.roomListManager.room(of: indexPath.item) else {return cell}
+        guard let room = viewModel?.roomListManager.room(of: indexPath.item) else { return cell }
         cell.configure(about: room)
         for image in room.images {
-            guard let url = URLBinder.shared.localUrl(index: room.id, of: image.url) else {
-                return cell
-            }
+            guard let url = URLBinder.shared.localUrl(index: room.id, of: image.url) else { return cell }
             let indices = room.updatedIndices(url: image.url)
             cell.updateImage(indices: indices, url: url)
         }

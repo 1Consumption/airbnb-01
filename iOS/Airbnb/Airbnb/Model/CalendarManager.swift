@@ -9,14 +9,13 @@
 import Foundation
 
 class CalendarManager {
+    
     static let daysArr = ["일", "월", "화", "수", "목", "금", "토"]
     private var months: [MonthInfo]
     private var currentYear = Calendar.current.component(.year, from: Date())
     private var currentMonth = Calendar.current.component(.month, from: Date())
     var count: Int {
-        get {
-            return months.count
-        }
+        get { return months.count }
     }
     
     init() {

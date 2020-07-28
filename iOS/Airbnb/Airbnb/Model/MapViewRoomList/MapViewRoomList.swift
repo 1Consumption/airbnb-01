@@ -9,6 +9,7 @@
 import Foundation
 
 struct MapViewRoomList: Decodable {
+    
     var avgStar: Double
     var coordinate: Coordinate
     var guests: Int
